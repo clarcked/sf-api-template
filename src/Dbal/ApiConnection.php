@@ -44,7 +44,9 @@ class ApiConnection extends Connection
     {
         $container = $this->dbSwitcher->getContainer();
 
-        $connection = $container->get(sprintf('doctrine.dbal.%s_connection', $this->dbSwitcher->getWorkingEntityManager()));
+        $infos = $this->dbSwitcher->getWorkingEntityManager();
+
+        $connection = $container->get(sprintf('doctrine.dbal.%s_connection', $infos["name"]));
 
         $this->_params = $connection->getParams();
 

@@ -18,9 +18,16 @@ class ApiDatabaseSwitcher
         return $this->container;
     }
 
-    public function getWorkingEntityManager(): string
+    public function getWorkingEntityManager(): array
     {
-        // return Request::getHeader('im-project-tag') ?? 'main' ;
-        return 'default';
+        $headers = $this->getContainer()
+            ->get("request_stack")
+            ->request->getCurrentRequest()
+            ->headers;
+        return [
+            "name" => $headers->get("project-name") ?? 'default',
+            "user" => $headers->get("project-user") ?? '',
+            "apikey" => $headers->get("project-apikey") ?? '',
+        ];
     }
 }
