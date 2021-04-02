@@ -1,0 +1,16 @@
+version: "3.7"
+services:
+  sf_api:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: sf_api
+    restart: always
+    ports:
+      - 8000:8000
+    volumes:
+      - ./:/home
+    expose:
+      - 8000
+volumes:
+  sf_api:
