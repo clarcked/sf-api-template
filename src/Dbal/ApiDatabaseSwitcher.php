@@ -21,7 +21,7 @@ class ApiDatabaseSwitcher
 
     public function getWorkingEntityManager(): array
     {
-        $options = ["tag" => "default","name" => "default",];
+        $options = ["tag" => "default","name" => "sf_api",];
         /** @var RequestStack $requestStack */
         $requestStack = $this->getContainer()
             ->get("request_stack");
