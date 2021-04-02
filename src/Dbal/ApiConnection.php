@@ -46,18 +46,19 @@ class ApiConnection extends Connection
 
         $infos = $this->dbSwitcher->getWorkingEntityManager();
 
-        $connection = $container->get(sprintf('doctrine.dbal.%s_connection', $infos["name"]));
+        $connection = $container->get(sprintf('doctrine.dbal.%s_connection', $infos["tag"]));
 
         $this->_params = $connection->getParams();
 
         if ($this->_isConn) {
             return false;
         }
-
         $driverOptions = $this->_params['driverOptions'] ?? [];
         $user = $this->_params['user'] ?? null;
         $password = $this->_params['password'] ?? null;
+        $this->_params["dbname"] = $infos["name"];
 
+//        dump($this->_params);
         $this->_conn = $this->_driver->connect($this->_params, $user, $password, $driverOptions);
         $this->_isConn = true;
 
