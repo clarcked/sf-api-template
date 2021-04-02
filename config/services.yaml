@@ -34,3 +34,10 @@ services:
     autowire: true;
     tags:
       - { name: 'doctrine.event_subscriber' }
+  database.switcher:
+    public: true
+    class: 'App\Dbal\ApiDatabaseSwitcher'
+    calls:
+      - method: setContainer
+        arguments:
+          - "@service_container"
