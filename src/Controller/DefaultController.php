@@ -19,10 +19,10 @@ class DefaultController extends AbstractController
     {
         $request = $this->get("request_stack");
         $resp = [];
-        $resp["name"] = $request->getCurrentRequest()->headers->get("project-name") ?? "default";
+        $resp["name"] = $request->getCurrentRequest()->headers->get("project-name") ?? "sf_api";
         $resp["tag"] = $request->getCurrentRequest()->headers->get("project-tag") ?? "default";
         $resp["apikey"] = $request->getCurrentRequest()->headers->get("project-apikey") ?? "0000";
-        $resp["user"] = $request->getCurrentRequest()->headers->get("project-user") ?? "anon";
+        $resp["user"] = $request->getCurrentRequest()->headers->get("project-user") ?? "anonymous";
         return $this->json($resp);
     }
 }
