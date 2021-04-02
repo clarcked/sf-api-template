@@ -1,19 +1,39 @@
 doctrine:
-    dbal:
-        override_url: true
+  dbal:
+    # IMPORTANT: You MUST configure your server version,
+    # either here or in the DATABASE_URL env var (see .env.local file)
+    #server_version: '13'
+    default_connection: default
+    connections:
+      default:
         url: '%env(resolve:DATABASE_URL)%'
-
-        # IMPORTANT: You MUST configure your server version,
-        # either here or in the DATABASE_URL env var (see .env.txt file)
-        #server_version: '13'
-    orm:
-        auto_generate_proxy_classes: true
-        naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
-        auto_mapping: true
+        driver: 'pdo_pgsql'
+        server_version: '5.7'
+        charset: utf8mb4
+      dynamic:
+        wrapper_class: 'App\Dbal\ApiConnection'
+        driver: 'pdo_pgsql'
+        charset: utf8mb4
+  orm:
+    default_entity_manager: customer
+    auto_generate_proxy_classes: true
+    proxy_dir: '%kernel.cache_dir%/src/Proxies'
+    entity_managers:
+      customer:
+        connection: dynamic
         mappings:
-            App:
-                is_bundle: false
-                type: annotation
-                dir: '%kernel.project_dir%/src/Entity'
-                prefix: 'App\Entity'
-                alias: App
+          Customer:
+            is_bundle: false
+            type: annotation
+            dir: '%kernel.project_dir%/src/Entity'
+            prefix: 'App\Entity'
+            alias: App\Entity
+      default:
+        connection: default
+        mappings:
+          Main:
+            is_bundle: false
+            type: annotation
+            dir: '%kernel.project_dir%/src/Entity'
+            prefix: 'App\Entity'
+            alias: App\Entity

@@ -3,7 +3,6 @@
 
 namespace App\Dbal;
 
-use App\Services\Http\Request;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -21,6 +20,7 @@ class ApiDatabaseSwitcher
 
     public function getWorkingEntityManager(): string
     {
-        return Request::getHeader('im-project-tag') ?? 'main' ;
+        // return Request::getHeader('im-project-tag') ?? 'main' ;
+        return 'default';
     }
 }

@@ -15,10 +15,9 @@ use Doctrine\DBAL\Exception;
 class ApiConnection extends Connection
 {
 
-    /** @var ApiDatabaseSwitcher */
-    protected $dbSwitcher;
-    protected $_params = [];
-    protected $_isConn = false;
+    protected ApiDatabaseSwitcher $dbSwitcher;
+    protected array $_params = [];
+    protected bool $_isConn = false;
 
     /**
      * ApiConnection constructor.
